@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Sticky Notification Bar
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: NotificationBar(
                   isPrifileVisible: true,
                   isFiltered: false,
@@ -60,22 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     context.goNamed('notifications');
                   }),
             ),
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //   child: NotificationBar(
-            //     isPrifileVisible: false,
-            //     trailingIcon: AppIcons.sortHighestLowestIcon,
-            //     child: OpenCustomDropdown(
-            //       currentMonth: "Months",
-            //       title: "Months",
-            //       items: const ["Days", "Weeks", "Months", "Years"],
-            //       onItemSelected: (value) {},
-            //     ),
-            //     onTap: () {
-            //       debugPrint('Notification Icon Tapped===>');
-            //     },
-            //   ),
-            // ),
 
             // Container(
             //   padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -115,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       buildAccountBalance(),
                       const SizedBox(height: 27),
-                      const Row(
+                      Row(
                         children: [
                           Expanded(
                               child: BuildSpendingCategoriesCard(
@@ -124,8 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             iconColor: AppColors.green100,
                             cardColor: AppColors.green100,
                             icon: AppIcons.incomeIcon,
+                            onTap: () {
+                              context.goNamed('income');
+                            },
                           )),
-                          SizedBox(width: 16),
+                          const SizedBox(width: 16),
                           Expanded(
                             child: BuildSpendingCategoriesCard(
                               cardTitle: "Expenses",
@@ -133,6 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               iconColor: AppColors.red100,
                               cardColor: AppColors.red100,
                               icon: AppIcons.expenseIcon,
+                              onTap: () {
+                                context.goNamed('expenses');
+                              },
                             ),
                           ),
                         ],
