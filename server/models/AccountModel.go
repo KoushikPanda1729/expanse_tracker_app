@@ -23,5 +23,5 @@ type Account struct {
 	Name         string             `json:"name"`
 	Account_Type *AccountType       `json:"account_type"`
 	Bank_Name    *BankName          `json:"bank_name,omitempty"`
-	Amount       float64            `json:"amount"`
+	Amount       *float64           `json:"amount"`
 }
