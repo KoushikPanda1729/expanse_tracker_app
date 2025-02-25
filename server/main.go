@@ -29,6 +29,7 @@ func main() {
 	routes.EmailRouter(router)
 	router.Use(middlewares.Authentication())
 	routes.AccountRouter(router)
+	routes.IncomeExpanseRouter(router)
 
 	router.Run(":" + port)
 

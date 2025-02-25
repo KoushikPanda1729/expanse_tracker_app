@@ -21,7 +21,7 @@ const (
 type Account struct {
 	ID           primitive.ObjectID `json:"_id" bson:"_id"`
 	Name         string             `json:"name"`
-	Account_Type *AccountType       `json:"account_type"`
-	Bank_Name    *BankName          `json:"bank_name,omitempty"`
+	Account_Type *AccountType       `json:"account_type" validate:"account_type"`
+	Bank_Name    *BankName          `json:"bank_name,omitempty" validate:"bank_name"`
 	Amount       *float64           `json:"amount"`
 }
