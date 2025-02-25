@@ -7,6 +7,7 @@ import (
 )
 
 type Category string
+type Type string
 
 const (
 	Subscription  Category = "Subscription"
@@ -18,10 +19,16 @@ const (
 	Insurance     Category = "Insurance"
 )
 
+const (
+	Income  Type = "Income"
+	Expanse Type = "Expanse"
+)
+
 type IncomeExpanse struct {
 	Id             primitive.ObjectID `json:"_id" bson:"_id"`
+	Type           Type               `json:"type"`
 	Amount         int64              `json:"amount"`
-	Category       Category           `json:"category" validate="category"`
+	Category       Category           `json:"category" validate:"category"`
 	Description    *string            `json:"description"`
 	AccountType    AccountType        `json:"account_type" validate:"account_type"`
 	BankName       *BankName          `json:"bank_name" validate:"bank_name"`
@@ -30,6 +37,8 @@ type IncomeExpanse struct {
 	Transaction_Id string             `json:"transaction_id,omitempty"`
 	Frequency      *time.Time         `json:"frequncy"`
 	End_after      *time.Time         `json:"end_after"`
-	Created_Date   primitive.DateTime `json:"created_date"`
-	Updated_Date   primitive.DateTime `json:"updated_date"`
+	Created_Date   time.Time          `json:"created_date"`
+	Updated_Date   time.Time          `json:"updated_date"`
+	// Type        string             `json:"type" validate:"required,oneof=Income Expense"`
+
 }
