@@ -60,36 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     context.goNamed('notifications');
                   }),
             ),
-
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16),
-            //   child: NotificationBar(
-            //     isPrifileVisible: false,
-            //     isTrailingIcon: false,
-            //     isBottonRequired: true,
-            //     title: "Yesterday",
-            //     onTap: () {
-            //       debugPrint('Notification Icon Tapped===>');
-            //     },
-            //   ),
-            // ),
-            // Container(
-            //   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            //   child: NotificationBar(
-            //     isStatButton: true,
-            //     isTrailingIcon: false,
-            //     child: OpenCustomDropdown(
-            //       currentMonth: "Months",
-            //       title: "Months",
-            //       items: const ["Days", "Weeks", "Months", "Years"],
-            //       onItemSelected: (value) {},
-            //     ),
-            //     onTap: () {
-            //       debugPrint('Notification Icon Tapped===>');
-            //     },
-            //   ),
-            // ),
-            // Scrollable Content
             Expanded(
               child: SingleChildScrollView(
                 child: Padding(
