@@ -1,3 +1,6 @@
+import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
+import 'package:expensetracker/commons/constants/app_colors.dart';
+import 'package:expensetracker/commons/text/app/views/custom_text_library.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,28 +19,23 @@ class OnboardingPage extends StatelessWidget {
               flex: 3,
               child: Center(
                 child: Image.asset(
-                  'assets/images/gain_total_control _of_your_money.png', // Ensure this image exists
+                  'assets/images/gain_total_control _of_your_money.png',
                   width: 200,
                 ),
               ),
             ),
-            const Text(
-              'Gain total control of your money',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 47),
+              child: Title1(
+                text: 'Gain total control of your money',
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 10),
-            const Text(
-              'Become your own money manager\nand make every cent count',
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
-              ),
+            const SizedBox(height: 17),
+            Body3(
+              text: "Become your own money manager\nand make every cent count",
               textAlign: TextAlign.center,
+              color: AppColors.dark25,
             ),
             const SizedBox(height: 20),
             Row(
@@ -76,34 +74,22 @@ class OnboardingPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                 children: [
-                  ElevatedButton(
+                  SolidButtonWidget(
+                    label: "Sign Up",
                     onPressed: () {
-                      context.push('/signup'); // Changed from push to goNamed
+                      context.push("/signup");
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      minimumSize: const Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    child: const Text(
-                      'Sign Up',
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
                   ),
-                  const SizedBox(height: 15),
-                  TextButton(
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  SolidButtonWidget(
+                    label: "Login",
                     onPressed: () {
-                      context.push('/login'); // Changed from push to go
+                      context.push("/login");
                     },
-                    style: TextButton.styleFrom(
-                      minimumSize: const Size(double.infinity, 50),
-                    ),
-                    child: const Text(
-                      'Login',
-                      style: TextStyle(color: Colors.purple, fontSize: 16),
-                    ),
+                    backgroundColor: AppColors.violet20,
+                    labelColor: AppColors.violet100,
                   ),
                 ],
               ),
