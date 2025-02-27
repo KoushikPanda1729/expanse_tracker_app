@@ -79,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             cardColor: AppColors.green100,
                             icon: AppIcons.incomeIcon,
                             onTap: () {
-                              context.goNamed('income');
+                              context.push('/income');
                             },
                           )),
                           const SizedBox(width: 16),
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               cardColor: AppColors.red100,
                               icon: AppIcons.expenseIcon,
                               onTap: () {
-                                context.goNamed('expenses');
+                                context.push('/expenses');
                               },
                             ),
                           ),

@@ -3,6 +3,7 @@ import 'package:expensetracker/pages/income/app/income_page.dart';
 import 'package:expensetracker/pages/onboarding_page/login_page.dart';
 import 'package:expensetracker/pages/onboarding_page/onboarding_page.dart';
 import 'package:expensetracker/pages/onboarding_page/signup_page.dart';
+import 'package:expensetracker/pages/transfer/app/transfer_page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:expensetracker/pages/notification/app/view/notification_page.dart';
@@ -47,6 +48,11 @@ final goRouter = GoRouter(
       name: 'signup',
       path: '/signup',
       builder: (context, state) => const SignupPage(),
+    ),
+    GoRoute(
+      name: 'transfer',
+      path: '/transfer',
+      builder: (context, state) => const TransferPage(),
     ),
     GoRoute(
       name: 'login',

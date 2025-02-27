@@ -78,7 +78,7 @@ class OnboardingPage extends StatelessWidget {
                 children: [
                   ElevatedButton(
                     onPressed: () {
-                      context.goNamed('signup'); // Changed from push to goNamed
+                      context.push('/signup'); // Changed from push to goNamed
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.purple,
@@ -95,7 +95,7 @@ class OnboardingPage extends StatelessWidget {
                   const SizedBox(height: 15),
                   TextButton(
                     onPressed: () {
-                      context.goNamed('login'); // Changed from push to go
+                      context.push('/login'); // Changed from push to go
                     },
                     style: TextButton.styleFrom(
                       minimumSize: const Size(double.infinity, 50),

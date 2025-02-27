@@ -10,90 +10,93 @@ class IncomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.green100,
-      body: Column(
-        children: [
-          // Top section with notification bar
-          SafeArea(
-            child: Container(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-              child: NotificationBar(
-                isPrifileVisible: false,
-                title: "Income",
-                leadingIcon: AppIcons.arrowLeftIcon,
-                isTrailingIcon: false,
-                labelColor: Colors.white,
-                onTap: () {
-                  if (GoRouter.of(context).canPop()) {
-                    context.pop();
-                  } else {
-                    context.pushReplacement('/');
-                  }
-                },
+    return WillPopScope(
+      onWillPop: () async {
+        context.pop(); // Navigate back to the previous page
+        return false; // Prevent default exit behavior
+      },
+      child: Scaffold(
+        backgroundColor: AppColors.green100,
+        body: Column(
+          children: [
+            // Top section with notification bar
+            SafeArea(
+              child: Container(
+                padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                child: NotificationBar(
+                  isPrifileVisible: false,
+                  title: "Income",
+                  leadingIcon: AppIcons.arrowLeftIcon,
+                  isTrailingIcon: false,
+                  labelColor: Colors.white,
+                  onTap: () {
+                    context.pop(); // Go back to the previous screen
+                  },
+                ),
               ),
             ),
-          ),
-          // Expanded red section with centered amount
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+            // Expanded section with amount
+            Expanded(
+              child: Container(
+                alignment: Alignment.center,
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'How much?',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      '\$0',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 64,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            // Bottom white section
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(24),
+                  topRight: Radius.circular(24),
+                ),
+              ),
+              child: Column(
                 children: [
-                  Text(
-                    'How much?',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    '\$0',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 64,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  _buildDropdownField('Category'),
+                  const SizedBox(height: 16),
+                  _buildTextField('Description'),
+                  const SizedBox(height: 16),
+                  _buildDropdownField('Wallet'),
+                  const SizedBox(height: 16),
+                  _buildAttachmentButton(),
+                  const SizedBox(height: 16),
+                  _buildRepeatToggle(),
+                  const SizedBox(height: 24),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    child:
+                        SolidButtonWidget(label: "Continue", onPressed: () {}),
+                  )
                 ],
               ),
             ),
-          ),
-          // Bottom white section
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            decoration: const BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
-              ),
-            ),
-            child: Column(
-              children: [
-                _buildDropdownField('Category'),
-                const SizedBox(height: 16),
-                _buildTextField('Description'),
-                const SizedBox(height: 16),
-                _buildDropdownField('Wallet'),
-                const SizedBox(height: 16),
-                _buildAttachmentButton(),
-                const SizedBox(height: 16),
-                _buildRepeatToggle(),
-                const SizedBox(height: 24),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  child: SolidButtonWidget(label: "Continue", onPressed: () {}),
-                )
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
