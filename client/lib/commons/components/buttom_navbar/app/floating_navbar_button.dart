@@ -39,7 +39,7 @@ class _FloatingActionButtonWidgetState
             right: 140,
             child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).goNamed('income');
+                context.push("/income");
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -69,7 +69,7 @@ class _FloatingActionButtonWidgetState
             left: 140,
             child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).goNamed('expenses');
+                context.push("/expenses");
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -99,7 +99,7 @@ class _FloatingActionButtonWidgetState
             right: 185,
             child: GestureDetector(
               onTap: () {
-                GoRouter.of(context).goNamed('transfer'); // Correct route
+                context.push("/transfer");
               },
               child: Container(
                 decoration: const BoxDecoration(
@@ -132,25 +132,31 @@ class _FloatingActionButtonWidgetState
               });
               widget.onTap();
             },
-            child: Container(
-              height: 120,
-              width: 56,
-              decoration: BoxDecoration(
-                color: widget.backgroundColor,
-                shape: BoxShape.circle,
-              ),
-              child: SvgPicture.asset(
-                widget.iconPath,
-                colorFilter: ColorFilter.mode(
-                  widget.iconColor,
-                  BlendMode.srcIn,
+            child: AnimatedRotation(
+              duration: const Duration(milliseconds: 300),
+              turns: _isExpanded
+                  ? 0.125
+                  : 0.0, // 45 degrees (0.125 of a full turn)
+              child: Container(
+                height: 120,
+                width: 56,
+                decoration: BoxDecoration(
+                  color: widget.backgroundColor,
+                  shape: BoxShape.circle,
                 ),
-                height: 32,
-                width: 32,
+                child: SvgPicture.asset(
+                  widget.iconPath,
+                  colorFilter: ColorFilter.mode(
+                    widget.iconColor,
+                    BlendMode.srcIn,
+                  ),
+                  height: 32,
+                  width: 32,
+                ),
               ),
             ),
           ),
-        ),
+        )
       ],
     );
   }
