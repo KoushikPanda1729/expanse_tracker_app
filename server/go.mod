@@ -1,6 +1,8 @@
 module expanse-tracker
 
-go 1.23
+go 1.23.0
+
+toolchain go1.23.2
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
@@ -10,6 +12,8 @@ require (
 	go.mongodb.org/mongo-driver v1.17.2
 	golang.org/x/crypto v0.26.0
 )
+
+require cloud.google.com/go/compute/metadata v0.3.0 // indirect
 
 require (
 	github.com/bytedance/sonic v1.11.6 // indirect
@@ -39,6 +43,7 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	golang.org/x/arch v0.8.0 // indirect
 	golang.org/x/net v0.25.0 // indirect
+	golang.org/x/oauth2 v0.27.0
 	golang.org/x/sync v0.8.0 // indirect
 	golang.org/x/sys v0.23.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
