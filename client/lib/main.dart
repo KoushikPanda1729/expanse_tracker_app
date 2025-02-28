@@ -8,6 +8,7 @@ import 'package:expensetracker/pages/profile/app/views/profile.dart';
 import 'package:expensetracker/pages/transaction/app/views/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/commons/router/app_router.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyAppRouter());
@@ -18,6 +19,11 @@ class MyAppRouter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Make status bar transparent
+      statusBarIconBrightness:
+          Brightness.dark, // Dark icons for light background
+    ));
     return MaterialApp.router(
       routerConfig: goRouter,
       debugShowCheckedModeBanner: false,
