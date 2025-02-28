@@ -7,5 +7,7 @@ class AppImages {
   static const String planningAhead = 'assets/images/planning_ahead.png';
   static const String yourEmailIsOnTheWay =
       'assets/images/your_email_is_on_the_way.png';
-      static const String profileImage ="assets/images/profile.jpeg";
+  static const String profileImage = "assets/images/profile.jpeg";
+  static const String flatColorGoogleIcon =
+      'assets/icons/flat-color-icons_google.svg';
 }

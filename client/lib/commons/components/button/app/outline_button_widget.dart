@@ -12,7 +12,6 @@ class OutlineButtonWidget extends BaseButtonWidget {
     bool isLeadingIcon = true,
     bool isEnabled = true,
     bool isCircle = false,
-    
     required super.onPressed,
     super.isLoading = false,
     super.key,
@@ -54,7 +53,8 @@ class OutlineButtonWidget extends BaseButtonWidget {
                   buildLoadingIndicator()
                 else ...[
                   if (buttonEntity.isLeadingIcon) buildIcon(),
-                  if (buttonEntity.iconPath != null && buttonEntity.label!='') const SizedBox(width: 10),
+                  if (buttonEntity.iconPath != null && buttonEntity.label != '')
+                    const SizedBox(width: 10),
                   buildLabel(),
                 ],
               ],

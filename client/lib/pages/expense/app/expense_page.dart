@@ -1,5 +1,8 @@
-import 'package:expensetracker/commons/constants/app_colors.dart';
+import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
+import 'package:expensetracker/commons/constants/app_colors.dart';
+import 'package:expensetracker/commons/constants/app_icons.dart';
 import 'package:go_router/go_router.dart';
 
 class ExpensePage extends StatelessWidget {
@@ -11,59 +14,82 @@ class ExpensePage extends StatelessWidget {
       backgroundColor: AppColors.red100,
       body: Column(
         children: [
-          const SizedBox(height: 50), // Adjust for status bar
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () => {context.goNamed('home')}),
-
-                const Text(
-                  'Expense',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(width: 48), // To balance the row
-              ],
+          // Top section with notification bar
+          SafeArea(
+            child: Container(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+              child: NotificationBar(
+                isPrifileVisible: false,
+                title: "Expense",
+                leadingIcon: AppIcons.arrowLeftIcon,
+                isTrailingIcon: false,
+                labelColor: Colors.white,
+                onTap: () {
+                  if (GoRouter.of(context).canPop()) {
+                    context.pop();
+                  } else {
+                    context.pushReplacement('/');
+                  }
+                },
+              ),
             ),
           ),
-          const Spacer(),
+          // Expanded red section with centered amount
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'How much?',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    '\$0',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 64,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          // Bottom white section
           Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+                topLeft: Radius.circular(24),
+                topRight: Radius.circular(24),
               ),
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('How much?',
-                    style:
-                        TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 10),
-                const Text('\$0',
-                    style:
-                        TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 20),
                 _buildDropdownField('Category'),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 _buildTextField('Description'),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 _buildDropdownField('Wallet'),
-                const SizedBox(height: 10),
+                const SizedBox(height: 16),
                 _buildAttachmentButton(),
-                const SizedBox(height: 20),
+                const SizedBox(height: 16),
                 _buildRepeatToggle(),
-                const SizedBox(height: 20),
-                _buildContinueButton(),
+                const SizedBox(height: 24),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: SolidButtonWidget(label: "Continue", onPressed: () {}),
+                )
               ],
             ),
           ),
@@ -74,15 +100,22 @@ class ExpensePage extends StatelessWidget {
 
   Widget _buildDropdownField(String hint) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: Colors.grey.shade200),
+        borderRadius: BorderRadius.circular(12),
       ),
       child: DropdownButtonFormField(
-        decoration: const InputDecoration(border: InputBorder.none),
-        hint: Text(hint),
-        items: [],
+        decoration: InputDecoration(
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          border: InputBorder.none,
+          hintText: hint,
+          hintStyle: TextStyle(
+            color: Colors.grey[500],
+            fontSize: 16,
+          ),
+        ),
+        items: const [],
         onChanged: (value) {},
       ),
     );
@@ -92,16 +125,47 @@ class ExpensePage extends StatelessWidget {
     return TextField(
       decoration: InputDecoration(
         hintText: hint,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+        hintStyle: TextStyle(
+          color: Colors.grey[500],
+          fontSize: 16,
+        ),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade200),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey.shade200),
+        ),
       ),
     );
   }
 
   Widget _buildAttachmentButton() {
-    return OutlinedButton.icon(
-      onPressed: () {},
-      icon: const Icon(Icons.attachment, color: Colors.grey),
-      label: const Text('Add attachment'),
+    return InkWell(
+      onTap: () {},
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey.shade200),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.attach_file, color: Colors.grey[600], size: 20),
+            const SizedBox(width: 8),
+            Text(
+              'Add attachment',
+              style: TextStyle(
+                color: Colors.grey[600],
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -109,8 +173,31 @@ class ExpensePage extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        const Text('Repeat transaction', style: TextStyle(fontSize: 16)),
-        Switch(value: false, onChanged: (value) {}),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Repeat',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              'Repeat transaction',
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.grey[600],
+              ),
+            ),
+          ],
+        ),
+        Switch(
+          value: false,
+          onChanged: (value) {},
+          activeColor: Colors.purple,
+        ),
       ],
     );
   }
@@ -120,15 +207,20 @@ class ExpensePage extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          backgroundColor: Colors.purple[600],
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
         ),
         onPressed: () {},
-        child: const Padding(
-          padding: EdgeInsets.all(15.0),
-          child: Text('Continue',
-              style: TextStyle(color: Colors.white, fontSize: 18)),
+        child: const Text(
+          'Continue',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ),
     );
