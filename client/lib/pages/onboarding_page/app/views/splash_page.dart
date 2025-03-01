@@ -7,15 +7,17 @@ class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
 
   @override
-  _SplashPageState createState() => _SplashPageState();
+  SplashPageState createState() => SplashPageState();
 }
 
-class _SplashPageState extends State<SplashPage> {
+class SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      context.go('/onboarding');
+    Future.delayed(const Duration(seconds: 1), () {
+      if (mounted) {
+        context.go('/onboarding');
+      }
     });
   }
 
