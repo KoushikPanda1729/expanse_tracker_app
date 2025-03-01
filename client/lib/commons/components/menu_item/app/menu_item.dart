@@ -56,14 +56,16 @@ class MenuItem extends StatelessWidget {
         ),
       ),
       trailing: amount != ""
-          ? Title3(text: "\$ ${amount}")
-          : isLogout == true ? SizedBox.shrink() : SvgPicture.asset(
-              AppIcons.arrowRight2Icon,
-              colorFilter: ColorFilter.mode(
-                AppColors.dark100.withOpacity(0.2),
-                BlendMode.srcIn,
-              ),
-            ),
+          ? Title3(text: "\$ $amount")
+          : isLogout == true
+              ? const SizedBox.shrink()
+              : SvgPicture.asset(
+                  AppIcons.arrowRight2Icon,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.dark100.withOpacity(0.2),
+                    BlendMode.srcIn,
+                  ),
+                ),
     );
   }
 }

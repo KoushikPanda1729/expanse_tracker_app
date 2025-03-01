@@ -2,7 +2,6 @@ import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/pages/financial_report/app/spending_page.dart';
-import 'package:expensetracker/pages/financial_report/app/budget_page.dart';
 import 'package:expensetracker/pages/financial_report/app/quote_page.dart';
 
 class FinancialReport extends StatefulWidget {
@@ -57,7 +56,7 @@ class _FinancialReportState extends State<FinancialReport> {
       maxEarnAndSpend: "5000",
       isBudget: true,
     ),
-    QuotePage(),
+    const QuotePage(),
   ];
 
   @override

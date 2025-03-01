@@ -85,7 +85,9 @@ class NavItem extends StatelessWidget {
         children: [
           SvgPicture.asset(
             iconPath,
-            color: isSelected ? AppColors.violet100 : Colors.grey,
+            colorFilter: ColorFilter.mode(
+                isSelected ? AppColors.violet100 : Colors.grey,
+                BlendMode.srcIn),
             height: 24,
             width: 24,
           ),

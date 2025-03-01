@@ -42,4 +42,6 @@ class AppIcons {
   static const String warningIcon = 'assets/icons/warning.svg';
   static const String plusIcon = 'assets/icons/close1.svg';
   static const String uploadIcon = 'assets/icons/upload.svg';
+  static const String camera = 'assets/icons/camera.svg';
+  static const String file = 'assets/icons/file.svg';
 }

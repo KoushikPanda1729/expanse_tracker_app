@@ -1,4 +1,5 @@
 import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
+import 'package:expensetracker/commons/components/custom_switch/app/custom_switch.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
@@ -193,36 +194,11 @@ class ExpensePage extends StatelessWidget {
             ),
           ],
         ),
-        Switch(
-          value: false,
-          onChanged: (value) {},
-          activeColor: Colors.purple,
+        CustomSwitch(
+          value: true,
+          onChanged: (value) => value,
         ),
       ],
-    );
-  }
-
-  Widget _buildContinueButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple[600],
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        onPressed: () {},
-        child: const Text(
-          'Continue',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
     );
   }
 }

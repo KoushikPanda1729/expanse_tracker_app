@@ -204,7 +204,7 @@ class NotificationBar extends StatelessWidget {
           if (!isBottonRequired! &&
               isTrailingIcon == false &&
               isStatButton == true)
-            StatButton(),
+            const StatButton(),
           if (isBottonRequired!)
             TextButton(
               onPressed: () {},
