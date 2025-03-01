@@ -1,4 +1,6 @@
 import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/email_textfield_widget.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/password_textfield_widget.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
@@ -38,21 +40,14 @@ class LoginPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Column(
                 children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Email",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
-                  ),
+                  EmailTextfieldWidget(
+                      initialText: "",
+                      labelText: "email",
+                      onTextChanged: (email) {}),
                   const SizedBox(height: 16),
-                  TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                      labelText: "Password",
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8)),
-                    ),
+                  PasswordTextFieldWidget(
+                    onTextChanged: (value) {},
+                    labelText: "Password",
                   ),
                   const SizedBox(height: 16),
                   Row(

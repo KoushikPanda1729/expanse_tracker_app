@@ -1,4 +1,7 @@
 import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/alphabetic_textfield_widget.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/email_textfield_widget.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/password_textfield_multi_validation_widget.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
@@ -37,29 +40,21 @@ class SignupPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Full Name",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
+                AlphabeticTextfieldWidget(
+                  labelText: "Username",
+                  initialText: '',
+                  hintText: 'e.g. John Doe',
+                  onTextChanged: (name) {},
                 ),
                 const SizedBox(height: 16),
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Email",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
-                ),
+                EmailTextfieldWidget(
+                    initialText: "",
+                    labelText: "email",
+                    onTextChanged: (email) {}),
                 const SizedBox(height: 16),
-                TextField(
-                  obscureText: true,
-                  decoration: InputDecoration(
-                    labelText: "Password",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                  ),
+                PasswordTextFieldMultiValidationWidget(
+                  labelText: "Password",
+                  onTextChanged: (value) {},
                 ),
                 const SizedBox(height: 16),
                 Row(
