@@ -7,6 +7,6 @@ import (
 )
 
 func GoogleAuth(incomingRoutes *gin.Engine) {
-	incomingRoutes.GET("/g-login", controller.HandleGoogleLogin)
-	incomingRoutes.GET("/g-callback", controller.HandleGoogleCallback)
+	incomingRoutes.GET("/v1/api/google/g-login", controller.HandleGoogleLogin)
+	incomingRoutes.GET("/v1/api/google/g-callback", controller.HandleGoogleCallback)
 }

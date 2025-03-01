@@ -30,6 +30,7 @@ func main() {
 	router.Use(middlewares.Authentication())
 	routes.AccountRouter(router)
 	routes.IncomeExpanseRouter(router)
+	routes.BudgetRouter(router)
 
 	router.Run(":" + port)
 
