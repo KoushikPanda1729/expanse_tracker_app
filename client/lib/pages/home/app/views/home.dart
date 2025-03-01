@@ -252,30 +252,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildToggle(String label) {
-    bool isSelected = label == "Income";
-
-    return GestureDetector(
-      onTap: () {
-        setState(() {});
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14.5),
-        child: Center(
-          child: Text(
-            label,
-            style: TextStyle(
-              color: isSelected ? AppColors.light100 : AppColors.dark100,
-              fontSize: 16,
-              height: 1.8,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget buildRecentTransactions() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

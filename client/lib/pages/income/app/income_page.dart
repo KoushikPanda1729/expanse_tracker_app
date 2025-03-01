@@ -1,4 +1,7 @@
 import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
+import 'package:expensetracker/commons/components/custom_bottom_sheet/app/open_custom_bottom_sheet.dart';
+import 'package:expensetracker/commons/components/custom_switch/app/custom_switch.dart';
+import 'package:expensetracker/commons/components/file_option_card/app/file_option_card.dart';
 import 'package:flutter/material.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
@@ -78,7 +81,7 @@ class IncomePage extends StatelessWidget {
                 const SizedBox(height: 16),
                 _buildDropdownField('Wallet'),
                 const SizedBox(height: 16),
-                _buildAttachmentButton(),
+                _buildAttachmentButton(context),
                 const SizedBox(height: 16),
                 _buildRepeatToggle(),
                 const SizedBox(height: 24),
@@ -139,9 +142,11 @@ class IncomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildAttachmentButton() {
+  Widget _buildAttachmentButton(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        openCustomBottomSheet(context: context, child: const FileOptionsRow());
+      },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
@@ -189,36 +194,11 @@ class IncomePage extends StatelessWidget {
             ),
           ],
         ),
-        Switch(
-          value: false,
-          onChanged: (value) {},
-          activeColor: Colors.purple,
+        CustomSwitch(
+          value: true,
+          onChanged: (value) => value,
         ),
       ],
-    );
-  }
-
-  Widget _buildContinueButton() {
-    return SizedBox(
-      width: double.infinity,
-      child: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.purple[600],
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
-          ),
-        ),
-        onPressed: () {},
-        child: const Text(
-          'Continue',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-      ),
     );
   }
 }

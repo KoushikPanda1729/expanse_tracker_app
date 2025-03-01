@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:expensetracker/commons/components/button/app/solid_button_widget.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/text/app/views/custom_text_library.dart';
@@ -135,6 +134,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
             const SizedBox(height: 30),
 
             /// **Fixed Buttons at Bottom**
+
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(

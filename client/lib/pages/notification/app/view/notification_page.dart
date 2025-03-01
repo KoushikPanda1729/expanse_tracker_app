@@ -31,34 +31,32 @@ class NotificationPage extends StatelessWidget {
               },
             ),
           ),
-          Container(
-            child: Row(
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Shopping budget has exceeds the..",
-                      style: TextStyle(
-                        fontSize: 16,
-                        height: 1.9,
-                        color: AppColors.dark100,
-                      ),
+          Row(
+            children: [
+              Column(
+                children: [
+                  const Text(
+                    "Shopping budget has exceeds the..",
+                    style: TextStyle(
+                      fontSize: 16,
+                      height: 1.9,
+                      color: AppColors.dark100,
                     ),
-                    const SizedBox(
-                      height: 4,
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    "Shopping budget has exceeds the..",
+                    style: TextStyle(
+                      fontSize: 13,
+                      height: 1.5,
+                      color: AppColors.dark100.withOpacity(0.1),
                     ),
-                    Text(
-                      "Shopping budget has exceeds the..",
-                      style: TextStyle(
-                        fontSize: 13,
-                        height: 1.5,
-                        color: AppColors.dark100.withOpacity(0.1),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            ),
+                  ),
+                ],
+              )
+            ],
           )
         ],
       )),

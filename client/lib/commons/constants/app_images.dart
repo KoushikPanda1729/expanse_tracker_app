@@ -10,4 +10,6 @@ class AppImages {
   static const String profileImage = "assets/images/profile.jpeg";
   static const String flatColorGoogleIcon =
       'assets/icons/flat-color-icons_google.svg';
+
+  static const String logo = "assets/images/orion_logo.png";
 }
