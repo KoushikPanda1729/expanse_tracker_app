@@ -7,6 +7,6 @@ import (
 )
 
 func AccountRouter(incomingRoutes *gin.Engine) {
-	incomingRoutes.POST("/add-account", controller.AddAccount())
-	incomingRoutes.POST("/delete-account/:account_id", controller.DeleteAccount())
+	incomingRoutes.POST("/v1/api/account/add-account", controller.AddAccount())
+	incomingRoutes.POST("/v1/api/account/delete-account/:account_id", controller.DeleteAccount())
 }
