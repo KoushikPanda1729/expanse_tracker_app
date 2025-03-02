@@ -40,7 +40,7 @@ class PasswordMultiValidator {
       'Minimum 5 characters in length',
       isEmpty
           ? AppIcons.warningIcon
-          : (minLengthError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (minLengthError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !minLengthError && !isEmpty,
       color: getColor(!minLengthError && !isEmpty),
     ));
@@ -50,7 +50,7 @@ class PasswordMultiValidator {
       'Maximum 15 characters in length',
       isEmpty
           ? AppIcons.warningIcon
-          : (maxLengthError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (maxLengthError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !maxLengthError && !isEmpty,
       color: getColor(!maxLengthError && !isEmpty),
     ));
@@ -60,7 +60,7 @@ class PasswordMultiValidator {
       'Has atleast 1 upper case character(A-Z)',
       isEmpty
           ? AppIcons.warningIcon
-          : (upperCaseError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (upperCaseError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !upperCaseError && !isEmpty,
       color: getColor(!upperCaseError && !isEmpty),
     ));
@@ -70,7 +70,7 @@ class PasswordMultiValidator {
       'Has atleast 1 lower case character(A-Z)',
       isEmpty
           ? AppIcons.warningIcon
-          : (lowerCaseError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (lowerCaseError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !lowerCaseError && !isEmpty,
       color: getColor(!lowerCaseError && !isEmpty),
     ));
@@ -80,7 +80,7 @@ class PasswordMultiValidator {
       'Has atleast 1 number [0-9]',
       isEmpty
           ? AppIcons.warningIcon
-          : (numberError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (numberError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !numberError && !isEmpty,
       color: getColor(!numberError && !isEmpty),
     ));
@@ -89,7 +89,7 @@ class PasswordMultiValidator {
       'Has atleast 1 symbol',
       isEmpty
           ? AppIcons.warningIcon
-          : (symbolError ? AppIcons.closeIcon : AppIcons.CheckIcon),
+          : (symbolError ? AppIcons.closeIcon : AppIcons.checkIcon),
       isValid: !symbolError && !isEmpty,
       color: getColor(!symbolError && !isEmpty),
     ));

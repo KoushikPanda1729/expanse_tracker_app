@@ -1,6 +1,6 @@
 import 'package:expensetracker/commons/components/build_spending_categories_card/app/build_spending_categories_card.dart';
-import 'package:expensetracker/commons/components/custom_dropDown_widget/app/custom_dropdown_widget.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/textfield_dropdown.dart';
 import 'package:expensetracker/commons/components/transaction_card/app/transaction_card.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
@@ -17,11 +17,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String _selectedFilter = 'Today';
+  String selectedFilter = 'Today';
 
-  void _updateFilter(String newFilter) {
+  void toggleFilter(String newFilter) {
     setState(() {
-      _selectedFilter = newFilter;
+      selectedFilter = newFilter;
     });
   }
 
@@ -37,27 +37,34 @@ class _HomeScreenState extends State<HomeScreen> {
               child: NotificationBar(
                   isPrifileVisible: true,
                   isFiltered: false,
-                  child: OpenCustomDropdown(
-                    currentMonth: "January",
-                    title: "Months",
-                    items: const [
-                      'January',
-                      'February',
-                      'March',
-                      'April',
-                      'May',
-                      'June',
-                      'July',
-                      'August',
-                      'September',
-                      'October',
-                      'November',
-                      'December',
-                    ],
-                    onItemSelected: (value) {},
+                  child: SizedBox(
+                    width: 107,
+                    child: TextfieldDropdown<String>(
+                      isCircularBorder: true,
+                      title: "Select months",
+                      label: '',
+                      hintText: '',
+                      selectedItem: 'January',
+                      items: const [
+                        'January',
+                        'February',
+                        'March',
+                        'April',
+                        'May',
+                        'June',
+                        'July',
+                        'August',
+                        'September',
+                        'October',
+                        'November',
+                        'December',
+                      ],
+                      onItemSelected: (category) {},
+                      getDisplayText: (category) => category,
+                    ),
                   ),
                   onTap: () {
-                    context.goNamed('notifications');
+                    context.push('/notifications');
                   }),
             ),
             Expanded(
@@ -182,14 +189,17 @@ class _HomeScreenState extends State<HomeScreen> {
         const SizedBox(height: 38),
         Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                _buildTimeFilterChip('Today'),
-                _buildTimeFilterChip('Week'),
-                _buildTimeFilterChip('Month'),
-                _buildTimeFilterChip('Year'),
-              ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  buildTimeFilterChip('Today'),
+                  buildTimeFilterChip('Week'),
+                  buildTimeFilterChip('Month'),
+                  buildTimeFilterChip('Year'),
+                ],
+              ),
             ),
             // Container(
             //   decoration: BoxDecoration(
@@ -230,11 +240,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildTimeFilterChip(String label) {
-    bool isSelected = label == _selectedFilter;
+  Widget buildTimeFilterChip(String label) {
+    bool isSelected = selectedFilter == label;
+
     return GestureDetector(
       onTap: () {
-        _updateFilter(label);
+        toggleFilter(label);
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
@@ -251,57 +262,57 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+}
 
-  Widget buildRecentTransactions() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        NotificationBar(
-          isPrifileVisible: false,
-          isTrailingIcon: false,
-          isBottonRequired: true,
-          title: "Recent Transaction",
-          onTap: () {
-            debugPrint('Notification Icon Tapped===>');
-          },
-        ),
-        const SizedBox(height: 16),
-        TransactionCard(
-          icon: AppIcons.shoppingBagIcon,
-          iconColor: AppColors.yellow100,
-          isIncome: false,
-          title: 'Shopping',
-          description:
-              'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
-          time: '02:30 PM',
-          amount: '- Rp 229.000',
-          onTap: () {},
-        ),
-        const SizedBox(height: 8),
-        TransactionCard(
-          icon: AppIcons.recurringBillIcon,
-          iconColor: AppColors.violet100,
-          isIncome: true,
-          title: 'Shopping',
-          description:
-              'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
-          time: '02:30 PM',
-          amount: '- Rp 229.000',
-          onTap: () {},
-        ),
-        const SizedBox(height: 8),
-        TransactionCard(
-          icon: AppIcons.restaurantIcon,
-          iconColor: AppColors.red100,
-          isIncome: false,
-          title: 'Shopping',
-          description:
-              'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
-          time: '02:30 PM',
-          amount: '- Rp 229.000',
-          onTap: () {},
-        )
-      ],
-    );
-  }
+Widget buildRecentTransactions() {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      NotificationBar(
+        isPrifileVisible: false,
+        isTrailingIcon: false,
+        isBottonRequired: true,
+        title: "Recent Transaction",
+        onTap: () {
+          print('Notification Icon Tapped===>');
+        },
+      ),
+      const SizedBox(height: 16),
+      TransactionCard(
+        icon: AppIcons.shoppingBagIcon,
+        iconColor: AppColors.yellow100,
+        isIncome: false,
+        title: 'Shopping',
+        description:
+            'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
+        time: '02:30 PM',
+        amount: '- Rp 229.000',
+        onTap: () {},
+      ),
+      const SizedBox(height: 8),
+      TransactionCard(
+        icon: AppIcons.recurringBillIcon,
+        iconColor: AppColors.violet100,
+        isIncome: true,
+        title: 'Shopping',
+        description:
+            'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
+        time: '02:30 PM',
+        amount: '- Rp 229.000',
+        onTap: () {},
+      ),
+      const SizedBox(height: 8),
+      TransactionCard(
+        icon: AppIcons.restaurantIcon,
+        iconColor: AppColors.red100,
+        isIncome: false,
+        title: 'Shopping',
+        description:
+            'lorem ipsum dolor sit amet consectetur lorem ipsum dolor sit amet consectetur',
+        time: '02:30 PM',
+        amount: '- Rp 229.000',
+        onTap: () {},
+      )
+    ],
+  );
 }

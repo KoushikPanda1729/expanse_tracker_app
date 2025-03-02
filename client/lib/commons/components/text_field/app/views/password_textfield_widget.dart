@@ -71,7 +71,7 @@ class PasswordTextFieldWidgetState
                   height: 18.0,
                   child: isValid
                       ? SvgPicture.asset(
-                          AppIcons.CheckIcon,
+                          AppIcons.checkIcon,
                           height: 18.0,
                           width: 18.0,
                           colorFilter: const ColorFilter.mode(

@@ -45,5 +45,5 @@ class AppIcons {
   static const String camera = 'assets/icons/camera.svg';
   static const String file = 'assets/icons/file.svg';
   static const String eyeClose = 'assets/icons/eye-close.svg';
-  static const String CheckIcon = 'assets/icons/check.svg';
+  static const String checkIcon = 'assets/icons/check.svg';
 }

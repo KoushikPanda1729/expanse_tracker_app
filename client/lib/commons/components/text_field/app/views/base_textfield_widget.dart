@@ -82,7 +82,6 @@ abstract class BaseTextfieldWidgetState<T extends BaseTextfieldWidget>
             buildTextField(state),
             const SizedBox(height: 8.0),
             if (validationMessages.isNotEmpty)
-              // buildHelperMessages(state.helperMessages ?? []),
               buildValidationMessages(validationMessages),
           ],
         );

@@ -24,7 +24,7 @@ class PasswordValidator {
         'Password should be at least 6 characters',
         isEmpty
             ? AppIcons.warningIcon
-            : (minLengthError ? AppIcons.warningIcon : AppIcons.CheckIcon),
+            : (minLengthError ? AppIcons.warningIcon : AppIcons.checkIcon),
         isValid: !minLengthError && !isEmpty,
         color: getColor(!minLengthError && !isEmpty),
       ),
