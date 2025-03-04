@@ -16,64 +16,130 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        padding: const EdgeInsets.only(left: 16, right: 16, bottom: 50),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 16),
-              child: SafeArea(
-                child: NotificationBar(
-                  isPrifileVisible: false,
-                  title: "Sign Up",
-                  leadingIcon: AppIcons.arrowLeftIcon,
-                  isTrailingIcon: false,
-                  labelColor: AppColors.dark100,
-                  onTap: () {
-                    context.goNamed("onboarding");
-                  },
-                ),
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 16,
+            right: 16,
+          ),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                AlphabeticTextfieldWidget(
-                  labelText: "Username",
-                  initialText: '',
-                  hintText: 'e.g. John Doe',
-                  onTextChanged: (name) {},
-                ),
-                const SizedBox(height: 16),
-                EmailTextfieldWidget(
-                    initialText: "",
-                    labelText: "email",
-                    onTextChanged: (email) {}),
-                const SizedBox(height: 16),
-                PasswordTextFieldMultiValidationWidget(
-                  labelText: "Password",
-                  onTextChanged: (value) {},
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (bool? newValue) {},
+                Container(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: SafeArea(
+                    child: NotificationBar(
+                      isPrifileVisible: false,
+                      title: "Sign Up",
+                      leadingIcon: AppIcons.arrowLeftIcon,
+                      isTrailingIcon: false,
+                      labelColor: AppColors.dark100,
+                      onTap: () {
+                        context.goNamed("onboarding");
+                      },
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AlphabeticTextfieldWidget(
+                      labelText: "Username",
+                      initialText: '',
+                      hintText: 'e.g. John Doe',
+                      onTextChanged: (name) {},
+                    ),
+                    const SizedBox(height: 16),
+                    EmailTextfieldWidget(
+                        initialText: "",
+                        labelText: "email",
+                        onTextChanged: (email) {}),
+                    const SizedBox(height: 16),
+                    PasswordTextFieldMultiValidationWidget(
+                      labelText: "Password",
+                      onTextChanged: (value) {},
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
                       children: [
-                        Body3(
-                          text: "By signing up, you agree to the",
+                        Checkbox(
+                          value: true,
+                          onChanged: (bool? newValue) {},
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Body3(
+                              text: "By signing up, you agree to the",
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Body3(
+                                text: "Terms of Service and Privacy Policy",
+                                color: AppColors.violet100,
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    SolidButtonWidget(
+                        label: "Sign  Up",
+                        onPressed: () {
+                          context.goNamed("home");
+                        }),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      onTap: () {
+                        context.goNamed("home");
+                      },
+                      child: Container(
+                        height: 56.0,
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.dark100),
+                          borderRadius: BorderRadius.circular(
+                            8.0,
+                          ),
+                        ),
+                        child: Center(
+                          child: FittedBox(
+                            child: Row(
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                SvgPicture.asset(AppIcons.flatColorGoogleIcon),
+                                const SizedBox(width: 10),
+                                Body3(
+                                    text: "Sign up with google",
+                                    color: AppColors.dark100)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Text("Already have an account? "),
                         GestureDetector(
-                          onTap: () {},
-                          child: Body3(
-                            text: "Terms of Service and Privacy Policy",
-                            color: AppColors.violet100,
+                          onTap: () {
+                            context.push("/login");
+                          },
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              color: AppColors.violet100,
+                            ),
                           ),
                         ),
                       ],
@@ -82,65 +148,7 @@ class SignupPage extends StatelessWidget {
                 )
               ],
             ),
-            Column(
-              children: [
-                SolidButtonWidget(
-                    label: "Sign  Up",
-                    onPressed: () {
-                      context.goNamed("home");
-                    }),
-                const SizedBox(height: 15),
-                GestureDetector(
-                  onTap: () {
-                    context.goNamed("home");
-                  },
-                  child: Container(
-                    height: 56.0,
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.dark100),
-                      borderRadius: BorderRadius.circular(
-                        8.0,
-                      ),
-                    ),
-                    child: Center(
-                      child: FittedBox(
-                        child: Row(
-                          // mainAxisSize: MainAxisSize.min,
-                          children: [
-                            SvgPicture.asset(AppIcons.flatColorGoogleIcon),
-                            const SizedBox(width: 10),
-                            Body3(
-                                text: "Sign up with google",
-                                color: AppColors.dark100)
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text("Already have an account? "),
-                    GestureDetector(
-                      onTap: () {
-                        context.push("/login");
-                      },
-                      child: const Text(
-                        "Login",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.violet100,
-                        ),
-                      ),
-                    ),
-                  ],
-                )
-              ],
-            )
-          ],
+          ),
         ),
       ),
     );
