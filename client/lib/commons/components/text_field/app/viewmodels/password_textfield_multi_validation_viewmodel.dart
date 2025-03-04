@@ -77,8 +77,8 @@ class PasswordTextFieldMultiValidationViewModel extends BaseTextFieldViewModel {
     return PasswordMultiValidator.isValid(text);
   }
 
-  // @override
-  // List<ValidationMessage> validateText(TextFieldEntity state) {
-  //   return PasswordMultiValidator.validate(state.text);
-  // }
+  @override
+  List<ValidationMessage> validateText(TextFieldEntity state) {
+    return PasswordMultiValidator.validate(state.text);
+  }
 }

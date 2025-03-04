@@ -1,9 +1,8 @@
 import 'package:expensetracker/commons/domain/token_entity.dart';
 import 'package:expensetracker/pages/login/data/datasources/login_datasource.dart';
 import 'package:expensetracker/pages/login/domain/repository/login_repository.dart';
-import 'package:expensetracker/commons/data/models/token_model.dart';
 
-class LoginRepositoryImpl extends LoginRepository {
+class LoginRepositoryImpl implements LoginRepository {
   final LoginDatasource _datasource;
 
   LoginRepositoryImpl(this._datasource);
@@ -11,7 +10,7 @@ class LoginRepositoryImpl extends LoginRepository {
   @override
   Future<TokenEntity> logintoAccount(String email, String password) async {
     try {
-      final TokenModel tokenModel =
+      final tokenModel =
           await _datasource.loginWithEmailAndPassword(email, password);
       return tokenModel.toEntity();
     } catch (e) {
