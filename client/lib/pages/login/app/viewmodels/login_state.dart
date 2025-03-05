@@ -5,6 +5,7 @@ class LoginPageState {
   final String? password;
   final TokenEntity? token;
   final String? dataRegion;
+  final String errorMessage;
   final bool isLoading;
 
   LoginPageState({
@@ -12,6 +13,7 @@ class LoginPageState {
     this.password,
     this.token,
     this.dataRegion,
+    this.errorMessage = '',
     this.isLoading = false,
   });
 
@@ -20,6 +22,7 @@ class LoginPageState {
     String? password,
     TokenEntity? token,
     String? dataRegion,
+    String? errorMessage,
     bool? isLoading,
   }) {
     return LoginPageState(
@@ -27,13 +30,14 @@ class LoginPageState {
       password: password ?? this.password,
       token: token ?? this.token,
       dataRegion: dataRegion ?? this.dataRegion,
+      errorMessage: errorMessage ?? this.errorMessage,
       isLoading: isLoading ?? this.isLoading,
     );
   }
 
   @override
   String toString() {
-    return 'LoginPageState(emailId: $emailId, password: $password, token: $token, dataRegion: $dataRegion, isLoading: $isLoading)';
+    return 'LoginPageState(emailId: $emailId, password: $password, token: $token, dataRegion: $dataRegion, errorMessage:$errorMessage,isLoading: $isLoading)';
   }
 
   Map<String, dynamic> toJson() {
@@ -42,6 +46,7 @@ class LoginPageState {
       'password': password,
       'token': token?.toJson(),
       'dataRegion': dataRegion,
+      'errorMessage': errorMessage,
       'isLoading': isLoading,
     };
   }
@@ -51,6 +56,7 @@ class LoginPageState {
       emailId: json['emailId'],
       password: json['password'],
       token: json['token'] != null ? TokenEntity.fromJson(json['token']) : null,
+      errorMessage: json['errorMessage'] ?? '',
       dataRegion: json['dataRegion'],
       isLoading: json['isLoading'],
     );

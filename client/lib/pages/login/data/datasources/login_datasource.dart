@@ -17,17 +17,19 @@ class LoginDatasource {
         'email': email,
         'password': password,
       });
+      print("===response => ${response.data}");
 
-      if (response.data["IsSuccess"] == true &&
-          response.data['Response'] != null &&
-          response.data['Response'] is Map<String, dynamic>) {
-        return TokenModel.fromJson(response.data['Response']);
+      // Directly parse the response data as the API returns the full user object
+      if (response.statusCode == 200) {
+        return TokenModel.fromJson(response.data);
       } else {
         throw Exception('Failed to login. Please check your credentials.');
       }
     } on DioException catch (e) {
-      throw Exception('Network error: ${e.message}');
+      print('DioException: ${e.response?.data ?? e.message}');
+      throw Exception('Network error: ${e.response?.data ?? e.message}');
     } catch (e) {
+      print('Login error: $e');
       throw Exception('Error: ${e.toString()}');
     }
   }

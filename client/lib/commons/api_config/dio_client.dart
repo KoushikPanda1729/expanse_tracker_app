@@ -1,12 +1,12 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class DioClient {
   final Dio dio;
 
-  DioClient()
+  DioClient({String? baseUrl})
       : dio = Dio(BaseOptions(
-          baseUrl: dotenv.env['BASE_URL'] ?? 'http://localhost:8000/api',
+          baseUrl: baseUrl ??
+              'http://localhost:8000/v1/api', // Ensure 'http://' is included
           connectTimeout: const Duration(seconds: 10),
           receiveTimeout: const Duration(seconds: 10),
           headers: {
@@ -14,6 +14,7 @@ class DioClient {
             'Accept': 'application/json',
           },
         )) {
+    print("Base URL iiiiiii: ${dio.options.baseUrl}"); // ✅ Print base URL
     dio.interceptors.add(LogInterceptor(responseBody: true));
   }
 }

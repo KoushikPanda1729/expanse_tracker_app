@@ -2,22 +2,33 @@ import 'package:expensetracker/commons/components/button/app/solid_button_widget
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
 import 'package:expensetracker/commons/text/app/views/custom_text_library.dart';
+import 'package:expensetracker/pages/login/app/providers/login_page_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-class LoginFooter extends StatelessWidget {
+class LoginFooter extends ConsumerWidget {
   const LoginFooter({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final viewModel = ref.read(loginProvider.notifier);
+    final state = ref.watch(loginProvider);
     return Column(
       children: [
         SolidButtonWidget(
+          isLoading: state.isLoading,
           label: "Sign in",
-          onPressed: () {
-            context.goNamed("home");
-          },
+          onPressed: viewModel.isPasswordValid()
+              ? () async {
+                  final response =
+                      await viewModel.loginUser(state.emailId, state.password);
+                  if (response) {
+                    context.goNamed("home");
+                  }
+                }
+              : null,
         ),
         const SizedBox(height: 15),
         GestureDetector(
