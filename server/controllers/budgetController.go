@@ -28,6 +28,8 @@ func CreateBudget() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
+		validate := validator.New()
+		validate.RegisterValidation("category", utils.ValidateCategory)
 
 		validationErr := validate.Struct(budget)
 
@@ -35,8 +37,6 @@ func CreateBudget() gin.HandlerFunc {
 			c.JSON(http.StatusBadRequest, gin.H{"error": validationErr.Error()})
 			return
 		}
-		validate := validator.New()
-		validate.RegisterValidation("category", utils.ValidateCategory)
 
 		budget.Created_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))
 		budget.Updated_at, _ = time.Parse(time.RFC3339, time.Now().Format(time.RFC3339))

@@ -8,7 +8,7 @@ import (
 
 type Budget struct {
 	Id               primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
-	Category         Category           `json:"category"`
+	Category         Category           `json:"category" validate:"category"`
 	Amount           *int64             `json:"amount"`        //default 0
 	Recieve_Alert    *bool              `json:"receive_alert"` //default false
 	Alert_Percentage *int               `json:"alert_percentage"`
