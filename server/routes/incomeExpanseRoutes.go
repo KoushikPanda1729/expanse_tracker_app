@@ -8,6 +8,9 @@ import (
 
 func IncomeExpanseRouter(incomingRoutes *gin.Engine) {
 	incomingRoutes.POST("/v1/api/income-expanse/add-income", controller.AddIncome())
-	incomingRoutes.GET("/v1/api/income-expanse/get-months-income", controller.GetIncomesByMonth())
+	incomingRoutes.POST("/v1/api/income-expanse/add-expense", controller.AddExpanse())
+	incomingRoutes.GET("/v1/api/income-expanse/get-months-income", controller.GetTotalIncomeByMonth())
+	incomingRoutes.GET("/v1/api/income-expanse/get-months-expense", controller.GetTotalExpanseByMonth())
+	incomingRoutes.GET("/v1/api/income-expanse/get-transactions", controller.GetTransactions())
 
 }
