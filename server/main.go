@@ -32,6 +32,7 @@ func main() {
 	router.Use(gin.Logger())
 	routes.UserRoutes(router)
 	routes.EmailRouter(router)
+	routes.GoogleAuth(router)
 	router.Use(middlewares.Authentication())
 	routes.AccountRouter(router)
 	routes.IncomeExpanseRouter(router)
