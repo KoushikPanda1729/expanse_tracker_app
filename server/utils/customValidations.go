@@ -17,7 +17,7 @@ func ValidateBankName(fl validator.FieldLevel) bool {
 	return bank_name == string(models.SBI) || bank_name == string(models.PNB) || bank_name == string(models.CITY_BANK) || bank_name == string(models.PAYTM) || bank_name == string(models.YES_BANK)
 }
 func ValidateCategory(fl validator.FieldLevel) bool {
-	category := fl.Field().String()
+	category := fl.Field().Interface().(models.Category)
 
-	return category == string(models.Food) || category == string(models.Shopping) || category == string(models.Insurance) || category == string(models.Rent) || category == string(models.Subscription)
+	return category == models.Food || category == models.Shopping || category == models.Insurance || category == models.Rent || category == models.Subscription
 }
