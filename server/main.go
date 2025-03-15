@@ -1,6 +1,7 @@
 package main
 
 import (
+	"expanse-tracker/config"
 	"expanse-tracker/db"
 	"expanse-tracker/middlewares"
 	"expanse-tracker/routes"
@@ -10,17 +11,37 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/go-redis/redis/v8"
 	"github.com/joho/godotenv"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
 var userCollection *mongo.Collection = db.OpenCollection(db.Client, "user")
 
+func InitRedis() *redis.Client {
+	rdb := redis.NewClient(
+		&redis.Options{
+			Addr:     "localhost:6379",
+			Password: "",
+			DB:       0,
+		})
+
+	_, err := rdb.Ping(config.Ctx).Result()
+	if err != nil {
+		log.Fatalf("Could not connect to redis : %v", err)
+	}
+	return rdb
+
+}
+
 func main() {
 	err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
+
+	//initiate redis client
+	config.Rdb = InitRedis()
 
 	port := os.Getenv("PORT")
 

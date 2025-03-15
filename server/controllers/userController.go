@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"context"
+	"expanse-tracker/config"
 	"expanse-tracker/db"
 	helper "expanse-tracker/helpers"
 	"expanse-tracker/models"
@@ -105,6 +106,18 @@ func Login() gin.HandlerFunc {
 		}
 
 		token, refreshToken, _ := helper.GenerateAllTokens(*foundUser.Email, *foundUser.Name, foundUser.User_Id)
+
+		tokenSeterr := config.Rdb.Set(ctx, "access_token"+foundUser.User_Id, token, 15*time.Minute).Err()
+		if tokenSeterr != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to store access token"})
+			return
+		}
+
+		RefTokenerr := config.Rdb.Set(ctx, "refreshToken"+foundUser.User_Id, refreshToken, 7*24*60*time.Minute).Err()
+		if RefTokenerr != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to store refresh token"})
+			return
+		}
 
 		helper.UpdateAllTokens(token, refreshToken, foundUser.User_Id)
 
