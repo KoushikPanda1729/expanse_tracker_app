@@ -2,7 +2,9 @@ package helpers
 
 import (
 	"context"
+	"expanse-tracker/config"
 	"expanse-tracker/db"
+	"expanse-tracker/models"
 	"fmt"
 	"log"
 	"os"
@@ -54,8 +56,9 @@ func GenerateAllTokens(email string, name string, user_id string) (signedToken s
 }
 
 func UpdateAllTokens(signedToken string, signedRefreshToken string, user_id string) {
-
 	var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+	defer cancel()
+
 	var updateObj primitive.D
 	updateObj = append(updateObj, bson.E{"token", signedToken})
 	updateObj = append(updateObj, bson.E{"refresh_token", signedRefreshToken})
@@ -67,7 +70,19 @@ func UpdateAllTokens(signedToken string, signedRefreshToken string, user_id stri
 	opt := options.UpdateOptions{
 		Upsert: &upsert,
 	}
+	var foundUser models.User
 
+	tokenSeterr := config.Rdb.Set(ctx, "access_token"+foundUser.User_Id, signedToken, 15*time.Minute).Err()
+	if tokenSeterr != nil {
+		fmt.Printf("Error updating access token in redis")
+		return
+	}
+
+	RefTokenerr := config.Rdb.Set(ctx, "refreshToken"+foundUser.User_Id, signedRefreshToken, 7*24*60*time.Minute).Err()
+	if RefTokenerr != nil {
+		fmt.Printf("Error updating refresh token in redis")
+		return
+	}
 	_, err := userCollection.UpdateOne(
 		ctx,
 		filter,
@@ -76,7 +91,6 @@ func UpdateAllTokens(signedToken string, signedRefreshToken string, user_id stri
 		},
 		&opt,
 	)
-	defer cancel()
 
 	if err != nil {
 		log.Panic(err)

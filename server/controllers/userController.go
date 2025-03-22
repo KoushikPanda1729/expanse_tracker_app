@@ -129,6 +129,34 @@ func Login() gin.HandlerFunc {
 
 func Logout() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		var ctx, cancel = context.WithTimeout(context.Background(), 100*time.Second)
+
+		defer cancel()
+
+		userId, exists := c.Get("user_id")
+
+		if !exists {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "User ID not found in context"})
+			return
+		}
+
+		err := config.Rdb.Del(ctx, "access_token"+userId.(string)).Err()
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete access token from Redis"})
+			return
+		}
+
+		//clear refresh token while needed
+
+		err = config.Rdb.Del(ctx, "refreshToken"+userId.(string)).Err()
+
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Failed to delete refresh token from Redis"})
+			return
+		}
+
+		c.JSON(http.StatusOK, gin.H{"status": "success", "message": "User logged out successfully"})
 
 	}
 }
