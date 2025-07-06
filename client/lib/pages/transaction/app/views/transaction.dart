@@ -1,5 +1,7 @@
-import 'package:expensetracker/commons/components/custom_dropDown_widget/app/custom_dropdown_widget.dart';
+import 'package:expensetracker/commons/components/custom_bottom_sheet/app/open_custom_bottom_sheet.dart';
+import 'package:expensetracker/commons/components/filter_bottomsheet/app/filter_bottomsheet.dart';
 import 'package:expensetracker/commons/components/notification_bar/notification_bar.dart';
+import 'package:expensetracker/commons/components/text_field/app/views/textfield_dropdown.dart';
 import 'package:expensetracker/commons/components/transaction_card/app/transaction_card.dart';
 import 'package:expensetracker/commons/constants/app_colors.dart';
 import 'package:expensetracker/commons/constants/app_icons.dart';
@@ -21,27 +23,37 @@ class TransactionScreen extends StatelessWidget {
             children: [
               NotificationBar(
                 trailingIcon: AppIcons.sortIcon,
-                child: OpenCustomDropdown(
-                  currentMonth: "January",
-                  title: "Months",
-                  items: const [
-                    'January',
-                    'February',
-                    'March',
-                    'April',
-                    'May',
-                    'June',
-                    'July',
-                    'August',
-                    'September',
-                    'October',
-                    'November',
-                    'December',
-                  ],
-                  onItemSelected: (value) {},
+                child: SizedBox(
+                  width: 107,
+                  child: TextfieldDropdown<String>(
+                    isCircularBorder: true,
+                    title: "Select months",
+                    label: '',
+                    hintText: '',
+                    selectedItem: 'January',
+                    items: const [
+                      'January',
+                      'February',
+                      'March',
+                      'April',
+                      'May',
+                      'June',
+                      'July',
+                      'August',
+                      'September',
+                      'October',
+                      'November',
+                      'December',
+                    ],
+                    onItemSelected: (category) {},
+                    getDisplayText: (category) => category,
+                  ),
                 ),
                 onTap: () {
-                  debugPrint('Notification Icon Tapped===>');
+                  openCustomBottomSheet(
+                    context: context,
+                    child: FilterBottomSheet(),
+                  );
                 },
               ),
               const SizedBox(height: 16),

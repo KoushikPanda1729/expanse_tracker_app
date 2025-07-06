@@ -20,6 +20,7 @@ class NotificationBar extends StatelessWidget {
   final Color? backgroundColor;
   final Color? labelColor;
   final void Function() onTap;
+  final void Function()? onTapTrailing;
 
   const NotificationBar({
     super.key,
@@ -28,6 +29,7 @@ class NotificationBar extends StatelessWidget {
     this.trailingIcon,
     this.child = const SizedBox(),
     required this.onTap,
+    this.onTapTrailing,
     this.isPrifileVisible = false,
     this.isTrailingIcon = true,
     this.isBottonRequired = false,
@@ -109,7 +111,7 @@ class NotificationBar extends StatelessWidget {
           if (isTrailingIcon == true) ...[
             if (trailingIcon != null)
               GestureDetector(
-                onTap: onTap,
+                onTap: onTapTrailing ?? onTap,
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
@@ -206,19 +208,16 @@ class NotificationBar extends StatelessWidget {
               isStatButton == true)
             const StatButton(),
           if (isBottonRequired!)
-            TextButton(
-              onPressed: () {},
-              child: SizedBox(
-                  width: 78,
-                  height: 32,
-                  child: SolidButtonWidget(
-                    label: "See All",
-                    onPressed: () {},
-                    isCircle: true,
-                    backgroundColor: AppColors.violet20,
-                    labelColor: AppColors.violet100,
-                  )),
-            ),
+            SizedBox(
+                width: 78,
+                height: 32,
+                child: SolidButtonWidget(
+                  label: "See All",
+                  onPressed: onTap,
+                  isCircle: true,
+                  backgroundColor: AppColors.violet20,
+                  labelColor: AppColors.violet100,
+                )),
         ],
       ),
     );
